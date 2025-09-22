@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sakthi S | Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Base Colors */
+    :root{
+      --lavender-dark: #9b59b6;
+      --lavender: #9370db;
+      --cream: #fdf6e3;
+      --card-dark: rgba(255,255,255,0.05);
+    }
+
+    /* Body & Background */
+    body{
+      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      margin:0;
+      color:#fff;
+      scroll-behavior: smooth;
+      transition: background .35s, color .35s;
+      background: #0d1117; /* dark night mode */
+    }
+
+    body.light{
+      background: linear-gradient(-45deg, #fdf6e3, #ffe4e1, #fce4ec, #fdf6e3);
+      color: #333;
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+    }
+
+    @keyframes gradientBG{
+      0% {background-position:0% 50%;}
+      50% {background-position:100% 50%;}
+      100% {background-position:0% 50%;}
+    }
+
+    /* Navbar */
+    .navbar{
+      background: rgba(0,0,0,0.9);
+      transition: background .35s;
+    }
+    body.light .navbar{ background: var(--lavender); }
+    .nav-link{ color: rgba(255,255,255,0.9) !important; }
+    body.light .nav-link{ color:#fff !important; }
+    .active-link{ color: var(--lavender-dark) !important; font-weight:700; }
+    body.light .active-link{ color: #fff !important; }
+
+    /* Header */
+    header{
+      position:relative;
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      overflow:hidden;
+    }
+    #particle-bg{ position:absolute; inset:0; width:100%; height:100%; z-index:0; }
+    .content{ position:relative; z-index:2; padding: 0 20px; }
+    header h1{ font-size:2.6rem; margin-bottom:.25rem; }
+    header p.sub{ margin-top:0.5rem; color: #d1c7e6; }
+    body.light header p.sub{ color: #333; }
+
+    /* Sections */
+    section{ padding:72px 0; opacity:0; transform: translateY(30px); transition: all .7s ease; }
+    section.show{ opacity:1; transform: translateY(0); }
+    h2{ text-align:center; margin-bottom:28px; font-weight:700; color: var(--lavender-dark); }
+    body.light h2{ color: #333; }
+
+    /* Cards */
+    .card{
+      border-radius:14px;
+      background: var(--card-dark);
+      border:1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+      color: inherit;
+      transition: background .35s, color .35s;
+    }
+    body.light .card{
+      background:#fff;
+      border:1px solid #d8bfd8;
+      color:#333;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    /* List group */
+    .list-group-item{ background: transparent; color: inherit; border: none; padding-left:0; }
+    body.light .list-group-item{ color: #333; }
+
+    /* Footer */
+    footer{ background: rgba(0,0,0,0.9); color: #bbb; padding:18px 0; text-align:center; transition: background .35s, color .35s; }
+    body.light footer{ background: var(--lavender); color:#fff; }
+
+    /* Theme toggle */
+    #theme-toggle{
+      position:fixed; right:20px; bottom:20px;
+      width:52px; height:52px; border-radius:50%; border:none;
+      background:var(--lavender-dark); color:#fff; font-size:20px; cursor:pointer;
+      box-shadow:0 8px 24px rgba(0,0,0,0.25); z-index:1200;
+      transition: transform .15s, background .2s;
+    }
+    #theme-toggle:active{ transform:scale(.98); }
+    #theme-toggle:hover{ background:var(--lavender); }
+
+    /* Responsive */
+    @media (max-width:576px){ header h1{ font-size:2rem; } }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">Sakthi S</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navCollapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Technical SKILLS</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">PROJECTS</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience">WORK EXPERIENCE</a></li>
+          <li class="nav-item"><a class="nav-link" href="#education">EDUCATION</a></li>
+          <li class="nav-item"><a class="nav-link" href="#certifications">CERTIFICATIONS</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">CONTACT</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header id="home">
+    <canvas id="particle-bg"></canvas>
+    <div class="content">
+      <h1>SAKTHI S</h1>
+      <p class="sub" id="typing-text"></p>
+      <div class="mt-3">
+        <a href="Sakthi_Resume.pdf" class="btn btn-light btn-sm" download>Download Resume</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about" class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <h2>SUMMARY</h2>
+        <div class="card p-4">
+          <p>
+            Dynamic Junior Software Developer with a proven track record at Creative Idea
+            Solutions, specializing in HTML, CSS, JavaScript, and .NET MVC. Demonstrated
+            strong leadership in team-based projects, delivering innovative and efficient
+            solutions using MySQL and modern development practices. Skilled in prompt
+            engineering and proficient with Canva Editor AI, enhancing both productivity and
+            creative output.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="container">
+    <h2>TECHNICAL SKILLS</h2>
+    <div class="row text-center">
+      <div class="col-md-3 mb-3"><div class="card p-3">Languages & Frameworks: C, C#, ASP.NET Core, ASP.NET MVC, JavaScript, SQL</div></div>
+      <div class="col-md-3 mb-3"><div class="card p-3">Frontend Technologies: HTML, CSS, Bootstrap</div></div>
+      <div class="col-md-3 mb-3"><div class="card p-3">Database: My Sql</div></div>
+      <div class="col-md-3 mb-3"><div class="card p-3">Tools & Platforms: Visual Studio, MySql WorkBench, Sql Server Management, Windsurf</div></div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="container">
+    <h2>PROJECTS</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-4 mb-3">
+        <div class="card p-3 text-center">
+          <h5>Enrich Early Learning</h5>
+          <p>
+            A premier platform offering early childhood programs: phonics, creative writing,
+            expressive arts, and learning programs for ages 10 months to 6+ years, with
+            locations in Coimbatore and Chennai.
+          </p>
+          <a href="https://enrichearlylearning.com/" 
+             class="btn btn-outline-primary btn-sm mt-2" 
+             target="_blank">🔗 Live Demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="container">
+    <h2>WORK EXPERIENCE</h2>
+    <div class="card p-3">
+      <h5>Full-Stack Developer | Web, API, Database, IoT & Team Leadership</h5>
+      <p>
+        Designed and developed responsive user interfaces using HTML, CSS, Bootstrap,
+        and JavaScript, delivering interactive and user-friendly web experiences.
+      </p>
+      <p>
+        Built and maintained web applications using ASP.NET Core and MVC, focusing on
+        efficient API development and smooth UI integration.
+      </p>
+      <p>
+        Managed MySQL databases, writing optimized SQL queries and designing reliable
+        relational data models.
+      </p>
+      <p>
+        Created engaging visual content using Canva for posters, banners, and
+        presentations to support branding and communication needs.
+      </p>
+      <p>
+        Demonstrated the ability to lead and coordinate teams, ensuring timely delivery of
+        quality solutions through effective collaboration and task delegation.
+      </p>
+      <hr />
+      <p><strong>Jun 2024 - Present</strong> <br> Junior Software Developer , Creative Ideas Solutions</p>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="container">
+    <h2>EDUCATION</h2>
+    <div class="card p-3">
+      <p><strong>2021 - 2024</strong> <br> Bachelor Of Computer Science</p>
+      <p>Government art and science college for women, Puliyakulam, Coimbatore</p>
+      <hr />
+      <p><strong>July 2024 - Present</strong> <br> Master of Computer Applications</p>
+      <p>School of Distance Education, Bharathiar University.</p>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications" class="container">
+    <h2>CERTIFICATIONS</h2>
+    <div class="card p-3">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">C Programming variables Input Output</li>
+        <li class="list-group-item">Programming Foundations With Javascript, Html, and CSS</li>
+        <li class="list-group-item">Ultimate Microsoft Office; Excel, Word, PowerPoint & Access</li>
+        <li class="list-group-item">Participation in international level student workshop on Data science</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="container">
+    <h2>CONTACT</h2>
+    <div class="card p-3 text-start">
+      <p><strong>Email:</strong> Sakthisri7806@gmail.com</p>
+      <p><strong>Phone:</strong> 6385504680</p>
+      <p><strong>Location:</strong> Coimbatore, Tamil Nadu</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 SAKTHI S</p>
+  </footer>
+
+  <!-- THEME TOGGLE -->
+  <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // typing text
+    const typingTxt = "Full-Stack Developer | Web, API, Database, IoT & Team Leadership";
+    let ti = 0;
+    function typeIt(){
+      if(ti < typingTxt.length){
+        document.getElementById("typing-text").innerText += typingTxt.charAt(ti);
+        ti++;
+        setTimeout(typeIt, 60);
+      }
+    }
+    window.addEventListener('load', typeIt);
+
+    // scroll reveal
+    const secs = document.querySelectorAll('section');
+    const onScroll = () => {
+      const trig = window.innerHeight * 0.85;
+      secs.forEach(s=>{
+        const top = s.getBoundingClientRect().top;
+        if(top < trig) s.classList.add('show');
+      });
+    };
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+
+    // nav active highlight
+    const navLinks = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', ()=>{
+      let fromTop = window.scrollY + 120;
+      navLinks.forEach(link=>{
+        const href = link.getAttribute('href');
+        if(!href || href.charAt(0) !== '#') return;
+        const sec = document.querySelector(href);
+        if(!sec) return;
+        if(sec.offsetTop <= fromTop && sec.offsetTop + sec.offsetHeight > fromTop){
+          link.classList.add('active-link');
+        } else link.classList.remove('active-link');
+      });
+    });
+
+    // particle background
+    const canvas = document.getElementById('particle-bg');
+    const ctx = canvas.getContext('2d');
+    function resizeCanvas(){ canvas.width = innerWidth; canvas.height = innerHeight; }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    let particles = [];
+    function initParticles(){
+      particles = [];
+      for(let i=0;i<80;i++){
+        particles.push({
+          x: Math.random()*canvas.width,
+          y: Math.random()*canvas.height,
+          dx: (Math.random()-0.5)*0.6,
+          dy: (Math.random()-0.5)*0.6,
+          r: 1.8 + Math.random()*1.5
+        });
+      }
+    }
+    initParticles();
+
+    function draw(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      const lightMode = document.body.classList.contains('light');
+      const fill = lightMode ? '#333' : '#fff';
+      const stroke = lightMode ? 'rgba(147,112,219,0.25)' : 'rgba(255,255,255,0.18)';
+      ctx.fillStyle = fill;
+      particles.forEach(p=>{
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fill();
+      });
+      for(let a=0;a<particles.length;a++){
+        for(let b=a+1;b<particles.length;b++){
+          const dx = particles[a].x - particles[b].x;
+          const dy = particles[a].y - particles[b].y;
+          const dist = Math.hypot(dx,dy);
+          if(dist < 120){
+            ctx.strokeStyle = stroke;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particles[a].x,particles[a].y);
+            ctx.lineTo(particles[b].x,particles[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+    function update(){
+      particles.forEach(p=>{
+        p.x += p.dx; p.y += p.dy;
+        if(p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if(p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      });
+    }
+    function loop(){
+      draw();
+      update();
+      requestAnimationFrame(loop);
+    }
+    loop();
+
+    // theme toggle
+    const toggle = document.getElementById('theme-toggle');
+    toggle.addEventListener('click', ()=>{
+      document.body.classList.toggle('light');
+      toggle.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
+    });
+  </script>
+</body>
+</html>
